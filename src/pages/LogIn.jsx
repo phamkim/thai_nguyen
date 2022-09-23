@@ -1,11 +1,119 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import background from "../assets/images/background.jpg";
 import iconBack from "../assets/images/back.png";
-import logo from "../assets/images/huyhieudoan.png";
+import logo from "../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/auth.provider";
+import axios from "axios";
+import { message } from "antd";
 
-export const Wrapper = styled.div`
+const LogIn = () => {
+  const [formdata, setFormdata] = useState({
+    userName: "",
+    passW: "",
+  });
+  const { user, setUser, token, setToken } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const logIn = async () => {
+    const data = JSON.stringify(formdata);
+    const config = {
+      method: "POST",
+      url: process.env.REACT_APP_BASE_URL + "/log-in",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+    await axios(config)
+      .then((response) => {
+        console.log(response);
+        if (response.data.token != null) {
+          setUser(response.data.user);
+          window.sessionStorage.setItem("user_id", response.data.user._id);
+          setToken(response.data.token);
+          window.sessionStorage.setItem("token", response.data.token);
+          if (response.data.user?._role == "admin") {
+            navigate("/admin");
+          } else {
+            navigate("/");
+          }
+        } else {
+          message.error("Sai tài khoản hoặc mật khẩu");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        message.error("Đăng nhập thất bại");
+      });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formdata);
+    logIn();
+  };
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormdata((values) => ({ ...values, [name]: value }));
+  };
+
+  return (
+    <Wrapper>
+      <Detail>
+        <Logo src={logo} width="200px" />
+        <Title color="#f8f23d" size="40px" textALign="center" fontWeight="bold">
+          HỆ THỐNG QUẢN LÝ
+        </Title>
+        <Title color="white" textALign="center" fontWeight="bold">
+          ĐẠI HỘI ĐẠI BIỂU ĐOÀN TNCS HỒ CHÍ MINH TỈNH THÁI NGUYÊN
+        </Title>
+        <Title color="white" textALign="center" fontWeight="bold">
+          LẦN THỨ XV, NHIỆM KỲ 2022-2027
+        </Title>
+      </Detail>
+      <LogInForm>
+        <Icon
+          onClick={() => {
+            navigate("/");
+          }}
+        />
+        <Form onSubmit={handleSubmit}>
+          <Logo src={logo} width="80px" />
+          <Title>Tên truy cập</Title>
+          <Input
+            // type="email"
+            type="text"
+            name="userName"
+            value={formdata.userName}
+            onChange={handleChange}
+          />
+          <Title>Mật khẩu</Title>
+          <Input
+            type="password"
+            name="passW"
+            value={formdata.passW}
+            onChange={handleChange}
+          />
+          <Button
+          // onClick={() => {
+          //   handleSubmit();
+          // }}
+          >
+            Đăng nhập
+          </Button>
+        </Form>
+      </LogInForm>
+    </Wrapper>
+  );
+};
+
+const Wrapper = styled.div`
   background-image: url(${background});
   background-size: cover;
   display: flex;
@@ -15,8 +123,7 @@ export const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
 `;
-
-export const LogInForm = styled.div`
+const LogInForm = styled.div`
   background: #fff;
   border-radius: 4px;
   height: 500px;
@@ -33,7 +140,7 @@ export const LogInForm = styled.div`
   }
 `;
 
-export const Detail = styled.div`
+const Detail = styled.div`
   background: transparent;
   height: 500px;
   width: 500px;
@@ -49,7 +156,7 @@ export const Detail = styled.div`
   }
 `;
 
-export const Icon = styled.p`
+const Icon = styled.p`
   background-image: url(${iconBack});
   background-size: cover;
   height: 30px;
@@ -153,71 +260,5 @@ const Title = styled.div`
   margin-bottom: 5px;
   width: 100%;
 `;
-
-const LogIn = () => {
-  const [dados, setDados] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(dados);
-  };
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    const { name, value } = e.target;
-    setDados(Object.assign(dados, { [name]: value }));
-  };
-
-  let navigate = useNavigate();
-
-  return (
-    <Wrapper>
-      <Detail>
-        <Logo src={logo} width="70px" />
-        <Title color="#f8f23d" size="20px" textALign="center" fontWeight="bold">
-          HỆ THỐNG QUẢN LÝ VĂN BẢN VÀ ĐIỀU HÀNH
-        </Title>
-        <Title color="white" textALign="center" fontWeight="bold">
-          TRUNG ƯƠNG ĐOÀN TNCS HỒ CHÍ MINH
-        </Title>
-      </Detail>
-
-      <LogInForm>
-        <Icon
-          onClick={() => {
-            navigate("/");
-          }}
-        />
-        <Form onSubmit={handleSubmit}>
-          <Logo src={logo} width="80px" />
-          <Title>Tên truy cập</Title>
-          <Input
-            type="email"
-            name="email"
-            // value={dados.email}
-            // onChange={handleChange}
-          />
-          <Title>Mật khẩu</Title>
-          <Input
-            type="password"
-            name="password"
-            // value={dados.password}
-            // onChange={handleChange}
-          />
-          <Button
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Đăng nhập
-          </Button>
-        </Form>
-      </LogInForm>
-    </Wrapper>
-  );
-};
 
 export default LogIn;

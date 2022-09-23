@@ -5,6 +5,7 @@ import BannerHeader from "../Banner/BannerHeader";
 import MyFooter from "./MyFooter";
 import NavBar from "../NavBar/NavBar";
 import MySider from "./MySider";
+import notice from "../../assets/images/note.png";
 
 export const MyContent = styled.div`
   display: flex;

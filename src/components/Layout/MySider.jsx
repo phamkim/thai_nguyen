@@ -1,7 +1,7 @@
 import { Image } from "antd";
 import React from "react";
 import styled from "styled-components";
-
+import tn_map from "../../assets/images/ban-do-thai-nguyen.jpg"
 const Wrapper = styled.div`
   width: 25vw;
   max-width: 320px;
@@ -29,7 +29,7 @@ const MySider = () => {
   return (
     <Wrapper>
       <Title>BẢN ĐỒ ĐỊA GIỚI HÀNH CHÍNH</Title>
-      <ImageMap src="https://thainguyen.gov.vn/documents/20181/209296/ban-do-hanh_chinh_2021.jpg/b93f3e72-d4f9-4750-88fe-42cd04256fb2?t=1638781233613" />
+      <ImageMap src={tn_map} />
     </Wrapper>
   );
 };

@@ -11,8 +11,13 @@ export const Nav = styled.nav`
   justify-content: space-between;
   z-index: 10;
   margin-top: -5px;
-  @media screen and (min-width: 768px) {
+
+  @media screen and (min-width: 1280px) {
     height: 45px;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 1280px) {
+    height: 70px;
   }
 
   @media screen and (max-width: 768px) {
@@ -102,8 +107,8 @@ export const NavBtn = styled.nav`
 
 export const NavBtnLink = styled(Link)`
   /* border-radius: 4px; */
-  background: #256ce1;
-  padding: 10px 22px;
+  background: ${(props) => props.color};
+  padding: 10px 20px;
   color: #fff;
   border: none;
   outline: none;
@@ -111,7 +116,7 @@ export const NavBtnLink = styled(Link)`
   text-align: center;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-
+  margin: 5px;
   &:hover {
     transition: all 0.2s ease-in-out;
     background: #fff;

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import bannerImage from "../../assets/images/bannerHeader.jpg";
+import bannerImage from "../../assets/images/bannerHeader.png";
 
 const BannerHeader = () => {
   return (

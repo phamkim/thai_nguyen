@@ -1,8 +1,21 @@
-@import '~antd/dist/antd.css';
-@import url("https://fonts.googleapis.com/css2?family=Sora&display=swap");
+@import "~antd/dist/antd.css";
 * {
-  font-family: "Sora", sans-serif;
+  font-family: sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+#components-layout-demo-responsive .logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.site-layout-sub-header-background {
+  background: #fff;
+}
+
+.site-layout-background {
+  background: #fff;
 }
