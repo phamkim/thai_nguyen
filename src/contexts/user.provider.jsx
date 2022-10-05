@@ -12,6 +12,7 @@ const UserProvider = ({ children }) => {
       headers: {
         "Content-Type": "application/json",
       },
+      
     };
     await axios(config).then((response) => {
       const _users = response.data;

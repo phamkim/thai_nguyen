@@ -33,6 +33,8 @@ export const CheckInForm = styled.div`
     height: 100%;
     width: 100%;
     border-radius: 0;
+    background-image: url(${background});
+    color: #fff;
   }
 `;
 
@@ -166,22 +168,22 @@ const delegationOptions = [
 ];
 
 const userOptions = [
-  {
-    value: "Vũ Thị Lệ",
-    label: "Vũ Thị Lệ",
-  },
-  {
-    value: "Dương Văn Hải",
-    label: "Dương Văn Hải",
-  },
-  {
-    value: "Dương Văn Duyên",
-    label: "Dương Văn Duyên",
-  },
-  {
-    value: "Trương Thị Thùy Châm",
-    label: "Trương Thị Thùy Châm",
-  },
+  // {
+  //   value: "Vũ Thị Lệ",
+  //   label: "Vũ Thị Lệ",
+  // },
+  // {
+  //   value: "Dương Văn Hải",
+  //   label: "Dương Văn Hải",
+  // },
+  // {
+  //   value: "Dương Văn Duyên",
+  //   label: "Dương Văn Duyên",
+  // },
+  // {
+  //   value: "Trương Thị Thùy Châm",
+  //   label: "Trương Thị Thùy Châm",
+  // },
 ];
 
 const CheckIn = () => {
@@ -209,6 +211,7 @@ const CheckIn = () => {
   return (
     <Wrapper>
       <Detail>
+        
         <Logo src={logo} width="200px" />
         <Title color="#f8f23d" size="40px" textALign="center" fontWeight="bold">
           HỆ THỐNG ĐIỂM DANH
@@ -227,6 +230,7 @@ const CheckIn = () => {
             navigate("/");
           }}
         />
+        <SizeBox height="100px"/>
         <Logo src={logo} width="100px" />
         <Row style={{ width: "100%", maxWidth: "258px" }}>
           <Title>Tên đại biểu:</Title>

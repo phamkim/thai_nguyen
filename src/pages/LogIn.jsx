@@ -13,6 +13,7 @@ const LogIn = () => {
     userName: "",
     passW: "",
   });
+  
   const { user, setUser, token, setToken } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -137,6 +138,8 @@ const LogInForm = styled.div`
     height: 100%;
     width: 100%;
     border-radius: 0;
+    background:  url(${background});
+    color: #fff;
   }
 `;
 
@@ -244,13 +247,7 @@ const Logo = styled.img`
   display: block;
 `;
 
-const ColCenter = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 50px;
-`;
+
 
 const Title = styled.div`
   font-weight: ${(props) => props.fontWeight};
